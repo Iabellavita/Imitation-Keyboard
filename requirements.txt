@@ -1,0 +1,2 @@
+keyboard==0.13.5
+pyfiglet==0.8.post1
