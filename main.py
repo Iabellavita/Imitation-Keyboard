@@ -1,21 +1,19 @@
 from pyfiglet import Figlet
 import random
 import keyboard
-import sys
 
 TIME_SLEEP = ['0.03', '0.04', '0.05', '0.06', '0.07', '0.08', '0.09', '0.1']
 
 
 def insert_imitation_text():
-    with open('text.txt', encoding='utf-8') as f:
-        text = f.readlines()
+    try:
+        with open('text.txt', encoding='utf-8') as f:
+            text = f.readlines()
 
-    for word in text:
-        keyboard.write(word, float(random.choice(TIME_SLEEP)))
-
-
-def stop_program():
-    sys.exit()
+        for word in text:
+            keyboard.write(word, float(random.choice(TIME_SLEEP)))
+    except:
+        print("\033[31m\033[4mOOPS, Error...\033[0m")
 
 
 if __name__ == "__main__":
@@ -31,7 +29,6 @@ if __name__ == "__main__":
 try:
     while True:
         keyboard.add_hotkey("ctrl+q", insert_imitation_text)
-        keyboard.add_hotkey("ctrl+j", stop_program)
 except KeyboardInterrupt:
     print("\n\033[31m\033[1m[ERROR]\033[0m PROGRAM STOPPED BY USER\n")
 
