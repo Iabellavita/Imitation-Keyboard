@@ -1,3 +1,4 @@
+from concurrent.futures import ProcessPoolExecutor
 from pyfiglet import Figlet
 import random
 import keyboard
@@ -8,7 +9,7 @@ TIME_SLEEP = ['0.03', '0.04', '0.05', '0.06', '0.07', '0.08', '0.09', '0.1']
 def insert_imitation_text():
     try:
         with open('text.txt', encoding='utf-8') as f:
-            text = f.readlines()
+            text = f.read()
 
         for word in text:
             keyboard.write(word, float(random.choice(TIME_SLEEP)))
@@ -26,10 +27,9 @@ if __name__ == "__main__":
         "\033[33m\033[1m\033[4m#3\033[0m---\033[32m\033[1mPRESS \033[31m\033[4mCtrl+Q\033[0m \033[32m\033[1mFOR START IMITATION\033[0m\n"
         "\033[33m\033[1m\033[4m#4\033[0m---\033[32m\033[1mPRESS \033[31m\033[4mCtrl+C\033[0m \033[32m\033[1mFOR STOP IMITATION\033[0m\n")
 
-try:
-    while True:
-        keyboard.add_hotkey("ctrl+q", insert_imitation_text)
-except KeyboardInterrupt:
-    print("\n\033[31m\033[1m[ERROR]\033[0m PROGRAM STOPPED BY USER\n")
-
-keyboard.release("ctrl+q")
+    try:
+        while True:
+            keyboard.add_hotkey("ctrl+q", insert_imitation_text)
+    except:
+        keyboard.release("ctrl+q")
+        print("\n\033[31m\033[1m[ERROR]\033[0m PROGRAM STOPPED\n")
